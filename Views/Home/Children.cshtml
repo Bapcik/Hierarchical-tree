@@ -12,8 +12,6 @@
             {
                 <button class="btn btn-sm btn-outline-secondary toggle-btn" data-bs-toggle="collapse"
                         data-bs-target="#children-@node.Id" aria-expanded="true">
-                    <i class="ti ti-plus"></i>
-                    <i class="ti ti-minus"></i>
                 </button>
             }
             else
@@ -25,12 +23,11 @@
 
             <div class="dropdown">
                 <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
-                    <i class="ti ti-menu-2"></i>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createModal">
-                            <i class="ti ti-plus"></i> Добавить
+                            Добавить
                         </a>
                     </li>
 
@@ -38,13 +35,13 @@
                     {
                         <li>
                             <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal-@node.Id">
-                                <i class="ti ti-edit"></i> Редактировать
+                                Редактировать
                             </a>
                         </li>
 
                         <li>
                             <a class="dropdown-item text-danger" asp-action="Delete" asp-route-id="@node.Id">
-                                <i class="ti ti-trash"></i> Удалить
+                               Удалить
                             </a>
                         </li>
                     }

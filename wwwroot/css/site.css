@@ -37,17 +37,3 @@ body {
 .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
-
-.toggle-btn[aria-expanded="true"] .ti-plus {
-  display: none;
-}
-.toggle-btn[aria-expanded="true"] .ti-minus {
-  display: inline;
-}
-
-.toggle-btn[aria-expanded="false"] .ti-plus {
-  display: inline;
-}
-.toggle-btn[aria-expanded="false"] .ti-minus {
-  display: none;
-}
