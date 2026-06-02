@@ -29,17 +29,19 @@
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item" asp-action="Create">
+                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createModal">
                             <i class="ti ti-plus"></i> Добавить
                         </a>
                     </li>
+
                     @if (node.ParentId != null)
                     {
                         <li>
-                            <a class="dropdown-item" asp-action="Edit" asp-route-id="@node.Id">
+                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal-@node.Id">
                                 <i class="ti ti-edit"></i> Редактировать
                             </a>
                         </li>
+
                         <li>
                             <a class="dropdown-item text-danger" asp-action="Delete" asp-route-id="@node.Id">
                                 <i class="ti ti-trash"></i> Удалить
