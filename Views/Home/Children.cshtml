@@ -1,0 +1,60 @@
+@model IEnumerable<testProject.Models.HierarchyModel>
+
+@foreach (var node in Model)
+{
+    var allNodes = ViewData["AllNodes"] as IEnumerable<testProject.Models.HierarchyModel>;
+    var children = allNodes?.Where(n => n.ParentId == node.Id).ToList();
+
+    <li data-id="@node.Id" style="list-style:none; margin-bottom:4px;">
+        <div class="d-flex align-items-center gap-2 p-2 border rounded">
+
+            @if (children != null && children.Any())
+            {
+                <button class="btn btn-sm btn-outline-secondary toggle-btn" data-bs-toggle="collapse"
+                        data-bs-target="#children-@node.Id" aria-expanded="true">
+                    <i class="ti ti-plus"></i>
+                    <i class="ti ti-minus"></i>
+                </button>
+            }
+            else
+            {
+                <span style="width:28px; display:inline-block;"></span>
+            }
+
+            <span class="flex-grow-1">@node.Name</span>
+
+            <div class="dropdown">
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                    <i class="ti ti-menu-2"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                        <a class="dropdown-item" asp-action="Create">
+                            <i class="ti ti-plus"></i> Добавить
+                        </a>
+                    </li>
+                    @if (node.ParentId != null)
+                    {
+                        <li>
+                            <a class="dropdown-item" asp-action="Edit" asp-route-id="@node.Id">
+                                <i class="ti ti-edit"></i> Редактировать
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item text-danger" asp-action="Delete" asp-route-id="@node.Id">
+                                <i class="ti ti-trash"></i> Удалить
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        @if (children != null && children.Any())
+        {
+            <ul class="dd-list collapse show" id="children-@node.Id">
+                @await Html.PartialAsync("Children", children, ViewData)
+            </ul>
+        }
+    </li>
+}

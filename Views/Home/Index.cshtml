@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model IEnumerable<testProject.Models.HierarchyModel>
+
+<div class="container mt-4">
+    <h2>Дерево иерархии</h2>
+
+    @if (Model != null && Model.Any())
+    {
+        ViewData["AllNodes"] = Model;
+        <div class="custom-tree">
+            <ul class="dd-list">
+                @await Html.PartialAsync("Children", Model.Where(n => n.ParentId == null), ViewData)
+            </ul>
+        </div>
+    }
+    else
+    {
+        <p>Нет данных</p>
+    }
+</div>
