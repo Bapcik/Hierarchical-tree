@@ -40,9 +40,10 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item text-danger" asp-action="Delete" asp-route-id="@node.Id">
-                               Удалить
-                            </a>
+                            <button type="button" class="dropdown-item text-danger" data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal-@node.Id">
+                                Удалить
+                            </button>
                         </li>
                     }
                 </ul>
