@@ -15,7 +15,41 @@ public class HomeController : Controller
     // GET
     public async Task<IActionResult> Index()
     {
-        return View(await db.HierarchyNodes.OrderBy(n => n.Id).ToListAsync());
+        var allData = await db.HierarchyNodes.OrderBy(n => n.Id).Select(n => new
+        {
+            n.Id,
+            n.Name
+        }).ToListAsync();
+        return Json(allData);
+    }
+
+    public async Task<IActionResult> GetRoot()
+    {
+        var root = await db.HierarchyNodes.Where(n => n.ParentId == null).OrderBy(n => n.Id).Select(n => new
+        {
+            n.Id,
+            n.Name,
+            n.ParentId,
+            HasChildren = db.HierarchyNodes.Any(c => c.ParentId == n.Id)
+        }).ToListAsync();
+        return Json(root);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetChildren(int Id)
+    {
+        var children = await db.HierarchyNodes
+            .Where(n => n.ParentId == Id)
+            .Select(n => new
+            {
+                n.Id,
+                n.Name,
+                n.ParentId,
+                HasChildren = db.HierarchyNodes.Any(c => c.ParentId == n.Id)
+            })
+            .ToListAsync();
+
+        return Json(children);
     }
 
     // POST
