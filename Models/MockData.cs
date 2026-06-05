@@ -4,7 +4,9 @@ public class MockData
 {
     public static void Seed(ApplicationContext db)
     {
-        if (db.HierarchyNodes.Any()) return;
+        // if (db.HierarchyNodes.Any()) return;
+        db.HierarchyNodes.RemoveRange(db.HierarchyNodes);
+        db.SaveChanges();
 
         db.HierarchyNodes.AddRange(
             new HierarchyModel { Id = 1, Name = "Layout", ParentId = null },
