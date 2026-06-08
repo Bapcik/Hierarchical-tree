@@ -15,12 +15,8 @@ public class HomeController : Controller
     // GET
     public async Task<IActionResult> Index()
     {
-        var allData = await db.HierarchyNodes.OrderBy(n => n.Id).Select(n => new
-        {
-            n.Id,
-            n.Name
-        }).ToListAsync();
-        return Json(allData);
+        
+        return View();
     }
 
     public async Task<IActionResult> GetRoot()

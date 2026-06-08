@@ -1,32 +1,26 @@
-@model IEnumerable<testProject.Models.HierarchyModel>
-
-@foreach (var node in Model)
-{
-
-    <div class="modal fade" id="editModal-@node.Id" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Редактировать</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <form action="/Home/Edit/@node.Id" method="post">
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label class="form-label">Имя</label>
-                            <input type="text" name="Name" class="form-control" value="@node.Name" />
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Родитель</label>
-                            <input type="number" name="ParentId" class="form-control" min="1" value="@node.ParentId" />
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
-                    </div>
-                </form>
+<div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Редактировать</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
+            <form id="editForm" method="post">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Имя</label>
+                        <input type="text" name="Name" class="form-control" id="editName" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Родитель</label>
+                        <input type="number" name="ParentId" class="form-control" min="1" id="editParentId" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
         </div>
     </div>
-}
+</div>

@@ -5,7 +5,7 @@
                 <h5 class="modal-title">Создать</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form action="/Home/Create" method="post">
+            <form id="createForm" method="post">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label">Имя</label>
@@ -13,7 +13,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Родитель</label>
-                        <input type="number" name="ParentId" class="form-control" min="1" />
+                        <input type="number" name="ParentId" class="form-control" min="1" id="createParentId" />
                     </div>
                 </div>
                 <div class="modal-footer">
