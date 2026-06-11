@@ -15,13 +15,13 @@ public class HomeController : Controller
     // GET
     public async Task<IActionResult> Index()
     {
-        
+
         return View();
     }
 
     public async Task<IActionResult> GetRoot()
     {
-        var root = await db.HierarchyNodes.Where(n => n.ParentId == null).OrderBy(n => n.Id).Select(n => new
+        var root = await db.HierarchyNodes.Where(n => n.ParentId == null).Select(n => new
         {
             n.Id,
             n.Name,
@@ -76,10 +76,14 @@ public class HomeController : Controller
     public async Task<IActionResult> Edit(int? id)
     {
 
-        if (id != null)
+        if (id == null)
         {
             HierarchyModel? node = await db.HierarchyNodes.FirstOrDefaultAsync(p => p.Id == id);
-            if (node != null) return View(node);
+
+            if (node == null)
+            {
+                return View(node);
+            }
         }
         return NotFound();
     }
@@ -108,16 +112,19 @@ public class HomeController : Controller
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
+        {
             return NotFound();
+        }
 
-        var node = await db.HierarchyNodes.FindAsync(id);
+        HierarchyModel? node = await db.HierarchyNodes.FirstOrDefaultAsync(p => p.Id == id);
 
         if (node == null)
+        {
             return NotFound();
+        }
 
         db.HierarchyNodes.Remove(node);
         await db.SaveChangesAsync();
-
         return RedirectToAction("Index");
     }
 
